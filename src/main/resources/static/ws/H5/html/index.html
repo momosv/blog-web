@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" xml:lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>大屏手机就是小米Max群</title>
+    <meta name="description" content="">
+    <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+    <script src="/webjars/stomp__stompjs/4.0.3/lib/stomp.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.js"></script>
+    <script>
+        !function (n) {
+            var e = n.document, t = e.documentElement, i = 720, o = i / 32,
+                a = "orientationchange" in n ? "orientationchange" : "resize", d = function () {
+                    var n = t.clientWidth || 320, n = n > 720 ? 720 : 320 > n ? 320 : n;
+                    t.style.fontSize = n / o + "px"
+                };
+            e.addEventListener && n.addEventListener(a, d, !1), d()
+        }(window);</script>
+    <link rel="stylesheet" type="text/css" href="/ws/H5/css/mimax.css"/>
+</head>
+<body>
+<input id="name" value="momo" type="text" onchange="changeUser()"/>
+<input id="toUser" value="momo" type="text" />
+<div class="chat">
+    <div class="box_bd scroll-wrapper">
+        <canvas id="emoji" class="emoji-canvas" width="720" height="1500"></canvas>
+        <div class="scroll-content J_scrollContent">
+            <div class="chatContent" id="chatContent">
+
+            </div>
+        </div>
+        <div class="train J_train">
+            <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/train.gif" alt="火车">
+        </div>
+    </div>
+    <div class="box_ft close">
+        <div class="input-wrapper">
+            <textarea class="input-wrapper" id="pushArea" style="overflow:hidden; resize:none;border-radius: 0.2rem; width: 80%;height: 2.125rem;margin-left: 5%;margin-top: 0.3rem"></textarea>
+            <img onclick=" subscribeOnLine()" src="http://c1.mifile.cn/f/i/hd/2016051101/input-down.png" alt="">
+        </div>
+
+    </div>
+</div>
+
+<div class="full-pics" id="J_fullPics">
+    <div class="pic"></div>
+</div>
+
+<audio id="message-push-music" preload="preload">
+    <source src="http://c1.mifile.cn/f/i/hd/2016051101/message-push.mp3" type="audio/mp3">
+</audio>
+
+<audio id="train-run-music" preload="none">
+    <source src="http://c1.mifile.cn/f/i/hd/2016051101/train-run.mp3" type="audio/mp3">
+</audio>
+
+<div style="display: none;" class="J_map">
+    <div class="map-wrapper J_mapWrapper">
+        <div class="map">
+            <div class="map-pointer"></div>
+        </div>
+        <p>驾驶总时长：<span class="J_tourtime">0</span> 小时</p>
+    </div>
+</div>
+
+<div class="fullpage-overlay video-overlay J_videoOverlay" width="1" height="1">
+    <div class="J_videoWrapper"></div>
+    <span class="tips-close J_videoClose"></span>
+</div>
+
+<div class="fullpage-overlay gallery-overlay J_galleryOverlay" data-gallery="1">
+    <div class="xm-slide J_gallerySlide">
+        <div class="xm-slide-scroll">
+            <figure>
+                <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/gallery-02.jpg">
+            </figure>
+            <figure>
+                <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/gallery-01.jpg">
+            </figure>
+            <figure>
+                <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/gallery-03.jpg">
+            </figure>
+            <figure>
+                <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/gallery-04.jpg">
+            </figure>
+            <figure>
+                <img data-origin="http://c1.mifile.cn/f/i/hd/2016051101/gallery-07.jpg">
+            </figure>
+        </div>
+    </div>
+    <span class="tips-close J_galleryClose"></span>
+</div>
+
+<script type="text/javascript">
+    var me = {
+        id: 'me', // 写死的，不用改
+        name: '默默' || '小米的朋友', // 用户昵称
+        avatar: '' || 'http://c1.mifile.cn/f/i/hd/2016051101/a-default.png', // 用户头像图片 url
+        userId: '', // 用户id
+        registered: false // 用户是否已经预约
+    };
+</script>
+
+    <script id="messageTpl" type="text/x-dot-template">
+    {{~it :message:index}}
+    <div class="clearfix">
+        {{? message.type == 'system'}}
+        <div class="message">
+            <p class="message_system">
+                <span class="content">{{=message.content}}</span>
+            </p>
+        </div>
+        {{??}}
+
+        <div class="message {{? message.author.id == 'me'}}me{{??}}others{{?}}">
+            <div class="avatar" data-author-id="{{=message.author.id}}">
+                <img src="{{=message.author.avatar}}" alt="{{=message.author.name}}">
+            </div>
+            <div class="content">
+                <p class="author_name">{{=message.author.name}}</p>
+                {{? message.type == 'plain'}}
+                <div class="bubble {{? message.author.id == 'me'}} bubble_primary right{{??}} bubble_default left{{?}}">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            <pre>{{=message.content}}</pre>
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'picture'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            {{? message.extra == 'gallery'}}
+                            <img class="J_galleryShow" data-gallery="1" src="{{=message.content}}"/>
+                            {{??}}
+                            <img class="J_img" src="{{=message.content}}"/>
+                            {{?}}
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'video'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            <img class="J_fpVideo" src="{{=message.content.poster}}"
+                                 data-src="{{=message.content.video}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                {{?? message.type == 'animation'}}
+                <div class="bubble {{? message.author.id == 'me'}} right{{??}} left{{?}} bubble_image">
+                    <div class="bubble_cont">
+                        <div class="{{=message.type}}">
+                            {{=message.content}}
+                        </div>
+                    </div>
+                </div>
+                {{?}}
+            </div>
+        </div>
+        {{?}}
+
+    </div>
+    {{~}}
+</script>
+
+
+<div id="chatTextModel" style="display: none">
+    <div class="clearfix">
+
+        <div class="message {me}">
+            <div class="avatar" data-author-id="me">
+                <img src="http://c1.mifile.cn/f/i/hd/2016051101/a-default.png" alt="{fromUser}">
+            </div>
+            <div class="content">
+                <p class="author_name">{fromUser}</p>
+                <div class="bubble {where}">
+                    <div class="bubble_cont">
+                        <div class="plain">
+                            <pre>{message.content}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="chatSysModel" style="display: none">
+    <div class="clearfix">
+        <div class="clearfix">
+            <div class="message">
+                <p class="message_system">
+                    <span class="content">{content}</span>
+                </p>
+            </div>
+    </div>
+</div>
+</div>
+
+
+<!--<script src="/ws/H5/js/jweixin-1.0.0.js"></script>
+<script src="/ws/H5/js/milib.js"></script>
+<script src="/ws/H5/js/slide.js"></script>
+<script src="/ws/H5/js/mimax.js?161222"></script>-->
+<!--<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>-->
+<!--<script src="/ws/H5/js/ws.js"></script>-->
+</body>
+
+<!--<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "/ws/H5/js/hm.js?71558e7b4aa822e282e758f8dc0b88b0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+
+
+</script>-->
+
+<script inline="javascript">
+    //链接endpoint名称为 "/endpointChat" 的endpoint。
+
+    var sock = new SockJS("/webSocketServer?token="+$("#name").val());
+    var stompClient = Stomp.over(sock);
+    // 向服务器发起websocket连接并发送CONNECT帧
+    stompClient.connect(
+        {
+            name: $("#name").val() // 携带客户端信息
+        },
+        function connectCallback(frame) {
+            // 连接成功时（服务器响应 CONNECTED 帧）的回调方法
+            //handleNotification("连接成功");
+             chat();
+            chat1();
+        },
+        function errorCallBack(error) {
+            // 连接失败时（服务器响应 ERROR 帧）的回调方法
+            handleNotification("连接失败");
+        }
+    );
+
+   function  changeUser(){
+       stompClient.disconnect(function () {
+
+       });
+        sock = new SockJS("/webSocketServer?token="+$("#name").val());
+       stompClient = Stomp.over(sock);
+       stompClient.connect(
+           {
+               name: $("#name").val() // 携带客户端信息
+           },
+           function connectCallback(frame) {
+               // 连接成功时（服务器响应 CONNECTED 帧）的回调方法
+               //handleNotification("连接成功");
+               chat();
+               chat1();
+           },
+           function errorCallBack(error) {
+               // 连接失败时（服务器响应 ERROR 帧）的回调方法
+               alert("连接失败");
+           }
+       );
+
+   }
+
+    //订阅消息
+    function chat() {
+        stompClient.subscribe('/user/queue/toChat', function (response) {
+            var returnData = JSON.parse(response.body);
+            handleNotification( returnData);
+        });
+    }    //订阅消息
+    function chat1() {
+        stompClient.send("/app/onLine", {}, JSON.stringify({ name:$("#name").val() }));
+        stompClient.subscribe('/queue/onLine', function (response) {
+            var returnData = JSON.parse(response.body);
+            var htmlModel=document.getElementById("chatSysModel").innerHTML.replace("{content}",returnData.responseMessage);
+            $("#chatContent").append(htmlModel);
+            document.getElementsByClassName("J_scrollContent")[0].scrollTop = document.getElementsByClassName("J_scrollContent")[0].scrollHeight;
+        });
+    }
+
+    function handleNotification(returnData) {
+            /*  $("#org_table_data tr:eq(1)").nextAll().remove();*/
+            var htmlModel=document.getElementById("chatTextModel").innerHTML;
+            var inHtml="";
+             inHtml+=htmlModel.replace("{message.content}",returnData.responseMessage)
+                 .replace("{me}","others")
+                 .replace("{fromUser}",returnData.fromUser)
+                 .replace("{fromUser}",returnData.fromUser)
+                 .replace("{where}","bubble_default left");
+
+            $("#chatContent").append(inHtml);
+
+        document.getElementsByClassName("J_scrollContent")[0].scrollTop = document.getElementsByClassName("J_scrollContent")[0].scrollHeight;
+    }
+
+
+    //订阅消息
+    function subscribeOnLine() {
+        var text = $("#pushArea").val();
+        var htmlModel=document.getElementById("chatTextModel").innerHTML;
+        var inHtml="";
+        inHtml+=htmlModel
+            .replace("{message.content}",text)
+            .replace("{me}","me")
+            .replace("{fromUser}",$("#name").val())
+            .replace("{fromUser}",$("#name").val())
+            .replace("{where}","bubble_primary right");
+
+        $("#chatContent").append(inHtml);
+        document.getElementsByClassName("J_scrollContent")[0].scrollTop = document.getElementsByClassName("J_scrollContent")[0].scrollHeight;
+
+        var toUser = $("#toUser").val();
+        stompClient.send("/app/toChat", {}, JSON.stringify({ toUser:toUser,msg: text }));
+    }
+
+    $('#stop').click(function() {
+        stompClient.disconnect(function () {
+            alert("See you next time!");
+        });
+    });
+</script>
+
+
+</html>

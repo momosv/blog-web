@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>消息上墙</title>
+    <meta name="format-detection" content="telephone=no">
+    <!--自动将网页中的电话号码显示为拨号的超链接-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <!--width宽度height高度，initial-scale初始的缩放比例，minimum-scale允许缩放到的最小比例，maximum-scale允许缩放到的最大比例，user-scalable是否可以手动缩放-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--IOS设备-->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!--IOS设备-->
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link rel="stylesheet" href="css/mend-reset.css" />
+    <link rel="stylesheet" href="css/mend-weikeniu.css" />
+    <link rel="stylesheet" href="css/weui.css" />
+
+    <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+    <script src="js/weui.min.js"></script>
+    <script src="js/fontSize.js"></script>
+</head>
+<body class="bg--efeff4">
+
+<!-- <>微现场 -->
+<div class="wei__scene-panel flexbox flex-direction--column">
+    <div class="wei__mask"></div>
+
+    <!-- //侧边栏 -->
+    <div class="ws__sidebar">
+        <div class="uinfo">
+            <img class="uimg" src="img/h1.jpg"/>
+            <h3 class="name">coco</h3>
+        </div>
+        <div class="nav">
+            <ul class="clearfix">
+                <li><a href="2-5-0微现场(签到).html"><i class="ico i1"></i>签到</a></li>
+                <li><a href="2-5-0微现场(消息上墙).html"><i class="ico i2"></i>消息上墙</a></li>
+                <li><a href="#"><i class="ico i3"></i>投票墙</a></li>
+                <li><a href="#"><i class="ico i4"></i>摇一摇</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- //顶部 -->
+    <div class="ws__header fixed">
+        <div class="inner">
+            <a class="cat J__sideToggle" href="javascript:;"></a>
+            <h2 class="hdTxt">嗨翻现场，就是这么任性！</h2>
+        </div>
+    </div>
+
+    <!-- //消息上墙页面 -->
+    <div class="ws__chatMsg-panel flex1">
+        <div class="chatMsg-ct">
+            <!-- //消息列表-->
+            <ul class="clearfix" id="J__chatMsgList">
+                <li class="time"><span>2017-06-12 12:30:55</span></li>
+                <!--别人-->
+                <li class="others">
+                    <div class="avatar">
+                        <img src="img/h3.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马云(老子天下第一)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                大家好，不要潜水啦，都出来聊天吧，给你们发红包噢~~ <img class="face" src="img/wei-scene/emotion/77.gif"><img class="face" src="img/wei-scene/emotion/77.gif"><img class="face" src="img/wei-scene/emotion/77.gif">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!--自己-->
+                <li class="me">
+                    <div class="avatar">
+                        <img src="img/memhead.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马蓉(小猫咪)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                好诶，好期待马总的红包！
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="others">
+                    <div class="avatar">
+                        <img src="img/h3.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马云(老子天下第一)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                最近了解到您们的XXX项目很火啊，用户量蹭蹭往上长，我想详细了解下这个项目，看能否有收购的可能？？
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="others image">
+                    <div class="avatar">
+                        <img src="img/h3.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马云(老子天下第一)</p>
+                        <div class="msg">
+                            <div class="picture">
+                                <img class="J__img" src="http://3g.weikeniu.com/images/ad-img001.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="others">
+                    <div class="avatar">
+                        <img src="img/h3.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马云(老子天下第一)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                这个是您们的促销活动吗？？？
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="me image">
+                    <div class="avatar">
+                        <img src="img/memhead.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马蓉(小猫咪)</p>
+                        <div class="msg">
+                            <div class="picture">
+                                <img class="J__img" src="http://image.woshipm.com/wp-files/2017/05/6gcOMMhnTR2iXYJ9e3EK.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="me">
+                    <div class="avatar">
+                        <img src="img/memhead.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马蓉(小猫咪)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                是的，如果想要了解更多的话，可以去我们的微官网看看~~~ <br />
+                                <a href="http://www.xxx.com">http://www.xxx.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="me image">
+                    <div class="avatar">
+                        <img src="img/memhead.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马蓉(小猫咪)</p>
+                        <div class="msg">
+                            <div class="video">
+                                <img class="J__video" src="img/video-poster.jpg" />
+                                <div class="btn-play J__btnPlay" data-videoUrl="http://www.runoob.com/try/demo_source/movie.mp4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="others">
+                    <div class="avatar">
+                        <img src="img/h3.jpg" />
+                    </div>
+                    <div class="content">
+                        <p class="author">马云(老子天下第一)</p>
+                        <div class="msg">
+                            <div class="plain">
+                                就喜欢你们看不惯我，但又干不掉我的样子! 哈哈哈~~ <img class="face" src="img/wei-scene/emotion/13.gif"><img class="face" src="img/wei-scene/emotion/13.gif">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- //尾部 -->
+    <div class="ws__footer">
+        <!--<div class="bottomfixed">-->
+        <!-- 输入框-->
+        <div class="wschat__input-panel flexbox">
+            <div class="editor-container flex1">
+                <div class="editor-text J__editorText" contenteditable="true"></div>
+            </div>
+            <span class="ico i-emotion"></span>
+            <span class="ico i-choice"></span>
+            <button class="btn-send J__submitCnt">发送</button>
+        </div>
+        <!-- 操作区(表情-选择)-->
+        <div class="wschat__choice-panel">
+            <!--表情区-->
+            <div class="similar-area emotion-area">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <dd><img class="face" src="img/wei-scene/emotion/0.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/1.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/2.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/3.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/4.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/5.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/6.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/7.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/8.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/9.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/10.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/11.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/12.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/13.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/14.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/15.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/16.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/17.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/18.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/19.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/20.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/21.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/22.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/23.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/24.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/25.gif" /></dd>
+                            <dd><img class="del" src="img/wei-scene/icon-del.png" /></dd>
+                        </div>
+                        <div class="swiper-slide">
+                            <dd><img class="face" src="img/wei-scene/emotion/26.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/27.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/28.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/29.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/30.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/31.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/32.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/33.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/34.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/35.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/36.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/37.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/38.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/39.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/40.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/41.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/42.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/43.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/44.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/45.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/46.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/47.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/48.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/49.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/50.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/51.gif" /></dd>
+                            <dd><img class="del" src="img/wei-scene/icon-del.png" /></dd>
+                        </div>
+                        <div class="swiper-slide">
+                            <dd><img class="face" src="img/wei-scene/emotion/52.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/53.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/54.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/55.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/56.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/57.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/58.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/59.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/60.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/61.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/62.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/63.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/64.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/65.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/66.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/67.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/68.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/69.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/70.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/71.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/72.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/73.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/74.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/75.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/76.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/77.gif" /></dd>
+                            <dd><img class="del" src="img/wei-scene/icon-del.png" /></dd>
+                        </div>
+                        <div class="swiper-slide">
+                            <dd><img class="face" src="img/wei-scene/emotion/78.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/79.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/80.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/81.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/82.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/83.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/84.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/85.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/86.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/87.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/88.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/89.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/90.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/91.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/92.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/93.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/94.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/95.gif" /></dd>
+
+                            <dd><img class="face" src="img/wei-scene/emotion/96.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/97.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/98.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/99.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/100.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/101.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/102.gif" /></dd>
+                            <dd><img class="face" src="img/wei-scene/emotion/103.gif" /></dd>
+                            <dd><img class="del" src="img/wei-scene/icon-del.png" /></dd>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <!--选择区-->
+            <div class="similar-area choice-area">
+                <ul class="flexbox">
+                    <li>
+                        <a class="J__chatPhoto" href="javascript:;"><i class="ico i1"></i><em>照片</em></a>
+                    </li>
+                    <li>
+                        <a class="J__chatVideo" href="javascript:;"><i class="ico i2"></i><em>视频</em></a>
+                    </li>
+                    <li>
+                        <a class="J__chatBaping" href="javascript:;"><i class="ico i3"></i><em>霸屏</em></a>
+                    </li>
+                    <li>
+                        <a class="J__chatHongbao" href="javascript:;"><i class="ico i4"></i><em>红包</em></a>
+                    </li>
+                    <li>
+                        <a class="J__chatDashang" href="javascript:;"><i class="ico i5"></i><em>打赏</em></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+</div>
+
+
+<!-- ……弹窗内容模板.Start -->
+<div id="dialogs">
+    <div class="weui-mask" style="display: none;"></div>
+
+    <!--BEGIN 红包-->
+    <div class="js_dialog" id="J_Dialog_hongbao" style="display: none;">
+        <!--<div class="weui-mask"></div>-->
+        <div class="weui-dialog">
+            <i class="weui-xclose"></i>
+            <div class="weui-dialog__bd">
+                <!-- //红包模板区-->
+                <div class="ws__popup-template">
+                    <div class="item flexbox">
+                        <label class="txt">总金额</label><input class="ipt-txt flex1" type="tel" name="hbAmount" placeholder="0.00" /><em class="unit">元</em>
+                    </div>
+                    <div class="item flexbox">
+                        <label class="txt">红包个数</label><input class="ipt-txt flex1" type="tel" name="hbNum" placeholder="填写个数" /><em class="unit">个</em>
+                    </div>
+                    <div class="tips">在线人数共<em class="memNum">186</em>人</div>
+                    <div class="item item-area">
+                        <textarea class="describe" name="content" placeholder="恭喜发财，大吉大利"></textarea>
+                    </div>
+                    <div class="amountTotal">￥<em class="num">0.00</em></div>
+                </div>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" style="background: #ff4400; border-radius: 4px; color: #fff;">塞钱进红包</a>
+            </div>
+        </div>
+    </div>
+    <!--END 红包-->
+
+    <!--BEGIN 霸屏-->
+    <div class="js_dialog" id="J_Dialog_baping" style="display: none;">
+        <!--<div class="weui-mask"></div>-->
+        <div class="weui-dialog">
+            <i class="weui-xclose"></i>
+            <div class="weui-dialog__bd">
+                <!-- //霸屏模板区-->
+                <div class="ws__popup-template">
+                    <div class="item flexbox">
+                        <input class="ipt-txt align-l flex1" type="text" name="bpTimeline" placeholder="选择霸屏时长" readonly />
+                    </div>
+                    <div class="item item-upload flexbox">
+                        <div class="ws__uploader-panel">
+                            <input class="ws__uploader-input" id="J__uploaderIpt" type="file" accept="image/*" />
+                            <div class="ws__uploader-tips">
+                                <i></i>
+                                <p>添加图片</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-area">
+                        <textarea class="describe" name="content" placeholder="添加文字"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" style="background: #ff4400; border-radius: 4px; color: #fff;">我要霸屏</a>
+            </div>
+        </div>
+    </div>
+    <!--END 霸屏-->
+
+    <!--BEGIN 打赏-->
+    <div class="js_dialog" id="J_Dialog_dashang" style="display: none;">
+        <!--<div class="weui-mask"></div>-->
+        <div class="weui-dialog">
+            <i class="weui-xclose"></i>
+            <div class="weui-dialog__bd">
+                <!-- //打赏模板区-->
+                <div class="ws__popup-template">
+                    <h2 class="hdTit">为喜欢的节目霸屏打赏</h2>
+                    <div class="item flexbox">
+                        <input class="ipt-txt align-l flex1" type="text" name="dschooseProgram" placeholder="选择打赏节目" readonly />
+                    </div>
+                    <div class="item item-area">
+                        <textarea class="describe" name="content" placeholder="输入打赏语，30字以内（选填）"></textarea>
+                    </div>
+                    <div class="item item-gift" id="J__chooseGift">
+                        <div class="gift flexbox selected" data-gift="001">
+                            <label class="txt"><span>豪车</span><em class="time">霸屏50秒</em></label>
+                            <span class="amount">￥<em>12</em> <i class="chkbox"></i></span>
+                        </div>
+                        <div class="gift flexbox" data-gift="002">
+                            <label class="txt"><span>动人玫瑰</span><em class="time">霸屏20秒</em></label>
+                            <span class="amount">￥<em>8</em> <i class="chkbox"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" style="background: #ff4400; border-radius: 4px; color: #fff;">支付 <span>￥<em class="moneyNum">12</em></span> 打赏</a>
+            </div>
+        </div>
+    </div>
+    <!--END 打赏-->
+</div>
+<script type="text/javascript">
+    $(function(){
+        /* ---红包事件.start */
+        //红包弹窗
+        $(".J__chatHongbao").on("click", function(){
+            $("#J_Dialog_hongbao").show();
+            $("#dialogs .weui-mask").fadeIn(200);
+        });
+        //确定
+        $("#J_Dialog_hongbao").on("click", ".weui-dialog__btn_primary", function(){
+            alert("塞钱成功！");
+
+            $(".weui-xclose").trigger("click");
+        });
+        /* ---红包事件.end */
+
+
+        /* ---霸屏事件.start */
+        //霸屏弹窗
+        $(".J__chatBaping").on("click", function(){
+            $("#J_Dialog_baping").show();
+            $("#dialogs .weui-mask").fadeIn(200);
+        });
+        //霸屏时长picker
+        $("input[name='bpTimeline']").on("click", function(){
+            var that = $(this);
+            weui.picker([{
+                    label: '10s　￥8',
+                    value: 8
+                },{
+                    label: '20s　￥16',
+                    value: 16
+                },{
+                    label: '30s　￥24',
+                    value: 24
+                },{
+                    label: '40s　￥32',
+                    value: 32
+                },{
+                    label: '50s　￥40',
+                    value: 40
+                },{
+                    label: '60s　￥48',
+                    value: 48
+                }], {
+                    onChange: function(res){
+                        console.log(res);
+                    },
+                    onConfirm: function(res){
+                        console.log(res);
+                        that.val("￥" + res);
+                    }
+                }
+            );
+        });
+        //确定
+        $("#J_Dialog_baping").on("click", ".weui-dialog__btn_primary", function(){
+            alert("霸屏成功！");
+
+            $(".weui-xclose").trigger("click");
+        });
+        /* ---霸屏事件.end */
+
+
+        /* ---打赏事件.start */
+        //打赏弹窗
+        $(".J__chatDashang").on("click", function(){
+            $("#J_Dialog_dashang").show();
+            $("#dialogs .weui-mask").fadeIn(200);
+        });
+        //打赏节目picker
+        $("input[name='dschooseProgram']").on("click", function(){
+            var that = $(this);
+            weui.picker([{
+                    label: '小品：送礼',
+                    value: '小品：送礼'
+                },{
+                    label: '歌曲：红日',
+                    value: '歌曲：红日'
+                },{
+                    label: '相声：就服你',
+                    value: '相声：就服你'
+                },{
+                    label: '歌曲：上海滩',
+                    value: '歌曲：上海滩'
+                },{
+                    label: '小品：回家过年',
+                    value: '小品：回家过年'
+                },{
+                    label: '相声：逗你玩',
+                    value: '相声：逗你玩'
+                }], {
+                    onChange: function(res){
+                        console.log(res);
+                    },
+                    onConfirm: function(res){
+                        console.log(res);
+                        that.val(res);
+                    }
+                }
+            );
+        });
+        //选择礼物
+        $("#J__chooseGift .gift").on("click", function(){
+            $(this).addClass("selected").siblings().removeClass("selected");
+            $("#J_Dialog_dashang .moneyNum").text($(this).find(".amount em").text());
+
+            console.log($(this).attr("data-gift"));
+        });
+        //确定
+        $("#J_Dialog_dashang").on("click", ".weui-dialog__btn_primary", function(){
+            alert("打赏成功！");
+
+            $(".weui-xclose").trigger("click");
+        });
+        /* ---打赏事件.end */
+
+
+        //右上角xx关闭弹窗
+        $(".weui-xclose").on("click", function(){
+            $(this).parents(".js_dialog").hide();
+
+            $("#dialogs .weui-mask").fadeOut(200);
+        });
+    });
+</script>
+<!-- ……弹窗内容模板.End -->
+
+<!-- ……视频弹窗.Start -->
+<div class="ws__popup-video">
+    <i class="popup__video-close"></i>
+    <video id="activityVideo" width="100%" height="100%" controls="controls" webkit-playsinline></video>
+</div>
+<!-- ……视频弹窗.End -->
+
+<!-- 左右滑屏(emotion表情) -->
+<link rel="stylesheet" href="../css/ws1.css" />
+<script src="js/swiper-3.4.1.min.js"></script>
+<script type="text/javascript">
+    var mySwiper = new Swiper('.swiper-container',{
+        observer: true,
+        observeParents: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        autoplayDisableOnInteraction: false
+    })
+</script>
+<!-- 左右滑屏.End -->
+
+</body>
+</html>

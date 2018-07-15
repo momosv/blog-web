@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>stomp</title>
+</head>
+
+<body>
+Welcome<br/><input id="text" type="text" /><input id="name" value="${name}" type="text" />
+<button onclick="send()">发送消息</button>
+<button onclick="subscribe3()">订阅消息/user/queue/message</button>
+<button onclick="subscribeAll()">订阅消息subscribeAll()</button>
+<button onclick=" subscribeOnLine();">  subscribeOnLine();</button>
+<button onclick=" sendName();">  sendName();</button>
+<button onclick=" sendLine();">  sendLine();</button>
+<hr/>
+<div id="message"></div>
+</body>
+
+<!--<script src="http://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>-->
+
+<script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+<script src="/webjars/stomp__stompjs/4.0.3/lib/stomp.js"></script>
+<script src="/webjars/sockjs-client/1.1.2/sockjs.js"></script>
+<script type="text/javascript">
+    // 建立连接对象（还未发起连接）
+    var socket = new SockJS("/webSocketServer");
+
+    // 获取 STOMP 子协议的客户端对象
+    var stompClient = Stomp.over(socket);
+
+    // 向服务器发起websocket连接并发送CONNECT帧
+    stompClient.connect(
+        {
+            name: document.getElementById("name").value // 携带客户端信息
+        },
+        function connectCallback(frame) {
+            // 连接成功时（服务器响应 CONNECTED 帧）的回调方法
+            setMessageInnerHTML("连接成功");
+            subscribeOnLine();
+            subscribeAll();
+        },
+        function errorCallBack(error) {
+            // 连接失败时（服务器响应 ERROR 帧）的回调方法
+            setMessageInnerHTML("连接失败");
+        }
+    );
+
+    //订阅消息
+    function subscribe3() {
+        stompClient.subscribe('/user/queue/message', function (response) {
+            var returnData = JSON.parse(response.body);
+            setMessageInnerHTML("/user/queue/message 你接收到的消息为:" + returnData.responseMessage);
+        });
+    }
+    //订阅消息
+    function subscribeAll() {
+        stompClient.subscribe('/queue/toAll', function (response) {
+            var returnData = JSON.parse(response.body);
+            setMessageInnerHTML("/queue/toAll 你接收到的消息为:" + returnData.responseMessage);
+        });
+    }
+
+        //订阅消息
+        function subscribeOnLine() {
+            var message = document.getElementById('name').value;
+            stompClient.send("/app/toAll", {}, JSON.stringify({'name': message}));
+        }
+
+        //发送消息
+        function send() {
+            var message = document.getElementById('text').value;
+            var messageJson = JSON.stringify({"name1": document.getElementById("name").value});
+            stompClient.send("/app/momo", {}, messageJson);
+            setMessageInnerHTML("/queue/OnLine 你发送的消息:" + message);
+        }
+
+        //将消息显示在网页上
+        function setMessageInnerHTML(innerHTML) {
+            document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        }
+
+    function sendName() {
+        var name = document.getElementById('name').value;
+        stompClient.send("/app/hello1", {}, JSON.stringify({ 'name': name }));
+    }
+    function sendLine() {
+        var name = document.getElementById('name').value;
+        stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
+    }
+
+
+</script>
+
+</html>

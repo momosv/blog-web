@@ -1,0 +1,128 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: ws,common,circle
+  freemarker:
+    request-context-attribute: req
+    suffix: .html
+    content-type: text/html
+    enabled: true
+    cache: false
+    template-loader-path: classpath:/templates/
+    charset: UTF-8
+    allow-request-override: false
+    allow-session-override: false
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+    settings:
+      number_format: '0.##'
+      template_update_delay: 0
+      default_encoding: UTF-8
+      classic_compatible: true
+
+  session:
+      store-type: none
+
+  datasource:
+  #123.207.23.166:3306
+    name: db
+    url: jdbc:mysql://119.29.208.67:3306/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
+    username: momo
+    password: MOcj123.
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    minIdle: 5
+    maxActive: 100
+    initialSize: 10
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 50
+    removeAbandoned: true
+    filters: stat
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+    druidLoginName: momo # 登录druid的账号
+    druidPassword: momo # 登录druid的密码
+
+  circle-datasource:
+    #123.207.23.166:3306
+      name: db
+      url: jdbc:mysql://119.29.208.67:3307/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
+      username: momo
+      password: momo
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      minIdle: 5
+      maxActive: 100
+      initialSize: 10
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      removeAbandoned: true
+
+     # HTTP ENCODING
+  http:
+    encoding.charset: UTF-8
+    encoding.enable: true
+    encoding.force: true
+  thymeleaf:
+    cache: false
+
+
+      #    order: 1
+
+#邮件
+#  mail:
+#    host: smtp.exmail.qq.com
+#    username: momosv@momosv.cn
+#    password: k8f4yavHZ4jQgUnx
+#    properties:
+#      mail:
+#        self:
+#          username: momo
+#        smtp:
+#          socketFactory:
+#            class: javax.net.ssl.SSLSocketFactory
+#            port: 465
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+
+
+
+#security:
+#  user:
+#    name: momo
+#    password: 123
+#  basic:
+#    enabled: false
+
+mybatis:
+  ext:
+     mapper-locations: classpath*:/*-mapper/*.xml
+
+logging:
+  config: classpath:logback.xml
+  path: logs
+  level:
+    org:
+      springframework:
+         security: INFO
+

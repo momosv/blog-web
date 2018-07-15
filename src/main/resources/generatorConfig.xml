@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="context1" targetRuntime="MyBatis3">
+
+		<!-- 注释 -->
+		<commentGenerator >
+			<property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+		</commentGenerator>
+
+		
+		<jdbcConnection
+			connectionURL="jdbc:mysql://119.29.208.67:3306/ws?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false"
+			driverClass="com.mysql.jdbc.Driver" password="MOcj520." userId="momo" />
+		
+		
+		<javaModelGenerator targetPackage="cn.momosv.websocket.model"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="common-mapper" targetProject=".\src\main\resources" >
+		 <property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!--     <collection property="user_id" resultMap="cn.momosv.springboot.dao.TbTestMapper.BaseResultMap"></collection> -->
+		<javaClientGenerator targetPackage="cn.momosv.websocket.dao"
+			targetProject=".\src\main\java" type="XMLMAPPER" />
+		
+ 		<table  tableName="tb_user" domainObjectName="TbUserPO"
+				enableInsert="false"
+				enableSelectByExample="false"
+				enableUpdateByPrimaryKey="false"
+				enableDeleteByPrimaryKey="false"
+				enableDeleteByExample="false"
+				enableCountByExample="false"
+				enableUpdateByExample="false"></table>
+		<table  tableName="tb_friend" domainObjectName="TbFriendPO"
+				enableInsert="false"
+				enableSelectByExample="false"
+				enableUpdateByPrimaryKey="false"
+				enableDeleteByPrimaryKey="false"
+				enableDeleteByExample="false"
+				enableCountByExample="false"
+				enableUpdateByExample="false"></table>
+		<table  tableName="tb_friend_message" domainObjectName="TbFriendMessagePO"
+				enableInsert="false"
+				enableSelectByExample="false"
+				enableUpdateByPrimaryKey="false"
+				enableDeleteByPrimaryKey="false"
+				enableDeleteByExample="false"
+				enableCountByExample="false"
+				enableUpdateByExample="false"></table>
+
+	</context>
+</generatorConfiguration>

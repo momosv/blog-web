@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<head>
+    <title>Home</title>
+
+    <script src="/webjars/jquery/3.3.1/dist/jquery.js"></script>
+    <script src="/webjars/stomp__stompjs/4.0.3/lib/stomp.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.js"></script>
+
+</head>
+<body>
+<p>
+    聊天室1
+</p>
+<input id="name" value="${name}" type="text" />
+<input id="toUser" value="${name}" type="text" />
+<form id="wiselyForm">
+    <textarea rows="4" cols="60" msg="text"></textarea>
+    <input type="submit"/>
+</form>
+
+
+<div id="output">
+    <input value="下线" id="stop">
+</div>
+</body>
+<script inline="javascript">
+    $('#wiselyForm').submit(function(e){
+        e.preventDefault();
+        var text = $('#wiselyForm').find('textarea[msg="text"]').val();
+        subscribeOnLine(text);
+    });
+    //链接endpoint名称为 "/endpointChat" 的endpoint。
+    var sock = new SockJS("/webSocketServer");
+    var stompClient = Stomp.over(sock);
+    // 向服务器发起websocket连接并发送CONNECT帧
+    stompClient.connect(
+        {
+            name: $("#name").val() // 携带客户端信息
+        },
+        function connectCallback(frame) {
+            // 连接成功时（服务器响应 CONNECTED 帧）的回调方法
+            handleNotification("连接成功");
+            chat();
+        },
+        function errorCallBack(error) {
+            // 连接失败时（服务器响应 ERROR 帧）的回调方法
+            handleNotification("连接失败");
+        }
+    );
+
+    //订阅消息
+    function chat() {
+        stompClient.subscribe('/user/queue/toChat', function (response) {
+            var returnData = JSON.parse(response.body);
+            handleNotification("/user/queue/toChat 你接收到的消息为:" + returnData.responseMessage);
+        });
+    }
+
+    function handleNotification(message) {
+        $('#output').append("<b>Received: " + message + "</b><br/>")
+    }
+
+
+    //订阅消息
+    function subscribeOnLine(text) {
+        var toUser = $("#toUser").val();
+        stompClient.send("/app/toChat", {}, JSON.stringify({ toUser:toUser,msg: text }));
+    }
+
+    $('#stop').click(function() {
+        stompClient.disconnect(function () {
+                alert("See you next time!");
+            });
+      });
+</script>
+</html>
