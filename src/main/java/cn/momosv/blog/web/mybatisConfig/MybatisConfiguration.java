@@ -43,7 +43,7 @@ import java.util.Properties;
 
 @MapperScan({MybatisConfiguration.BASIC_MAPPER_DAO})
 @Configuration
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "mybatis.ext")
 @EnableTransactionManagement
 public class MybatisConfiguration implements TransactionManagementConfigurer {
 
@@ -64,10 +64,18 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
 
 
         //  配置mapper的扫描，找到所有的mapper.xml映射文件
-        @Value("${mybatis.ext.mapper-locations}")
-        private List<String> extMapperLocations;
+      //  @Value("${mybatis.ext.mapper-locations}")
+        private List<String> mapperLocations;
 
-        @Autowired
+        public List<String> getMapperLocations() {
+            return mapperLocations;
+        }
+
+        public void setMapperLocations(List<String> mapperLocations) {
+            this.mapperLocations = mapperLocations;
+        }
+
+    @Autowired
         private DataSource dataSource;
 
         // 提供SqlSeesion
@@ -81,7 +89,7 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
                 sessionFactoryBean.setTypeAliasesPackage(typeAliasesPackage);
                 
                 //设置mapper.xml文件所在位置
-                BASIC_MAPPER_LOCATIONS.addAll(extMapperLocations);
+                BASIC_MAPPER_LOCATIONS.addAll(mapperLocations);
                 List<Resource> rL = new ArrayList<>();
                 for (String mapperLocation : BASIC_MAPPER_LOCATIONS) {
                     Resource[] resources = new PathMatchingResourcePatternResolver().getResources(mapperLocation);

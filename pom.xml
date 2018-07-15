@@ -32,6 +32,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
 
+	<dependency>
+		<groupId>cn.momosv</groupId>
+		<artifactId>blog-circle</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+
 
 	<dependency>
 		<groupId>org.webjars</groupId>
