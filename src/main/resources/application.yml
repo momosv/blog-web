@@ -116,7 +116,8 @@ spring:
 
 mybatis:
   ext:
-     mapper-locations: classpath*:/ws-mapper/*.xml
+     mapper-locations:
+        - classpath*:/ws-mapper/*.xml
 
 logging:
   config: classpath:logback.xml
