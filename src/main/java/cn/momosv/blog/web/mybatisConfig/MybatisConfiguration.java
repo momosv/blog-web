@@ -3,7 +3,7 @@ package cn.momosv.blog.web.mybatisConfig;
 
 
 
-import cn.momosv.blog.web.dataSource.SqlPrintInterceptor;
+import cn.momosv.blog.common.config.SqlPrintInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,8 +58,8 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
         private  List<String> BASIC_MAPPER_LOCATIONS;
 
         //  加载全局的配置文件
-            @Value("${mybatis-common.config-location}")
-            private String configLocation;
+        @Value("${mybatis-common.config-location}")
+        private String configLocation;
         //--------------------上面是公共包---------------------
 
 
@@ -75,7 +75,7 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
             this.mapperLocations = mapperLocations;
         }
 
-    @Autowired
+        @Autowired
         private DataSource dataSource;
 
         // 提供SqlSeesion
@@ -96,7 +96,7 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
                     rL.addAll(Arrays.asList(resources));
                 }
                 sessionFactoryBean.setMapperLocations(rL.toArray(new Resource[rL.size()]));
-             //设置mybatis-config.xml配置文件位置
+                //设置mybatis-config.xml配置文件位置
                 sessionFactoryBean.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
 
                 //添加分页插件、打印sql插件
@@ -113,33 +113,29 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
             }
         }
 
-        @Bean
-        public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        	return new SqlSessionTemplate(sqlSessionFactory);
-        }
-        
         //事务管理
         @Bean(name = "DataSourceTransactionManager")
         public PlatformTransactionManager annotationDrivenTransactionManager() {
             return new DataSourceTransactionManager(dataSource);
         }
 
-
+        @Bean("sqlSessionTemplate")
+        public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+        	return new SqlSessionTemplate(sqlSessionFactory);
+        }
 
         //将要执行的sql进行日志打印(不想拦截，就把这方法注释掉)
-        @Bean
+        @Bean("sqlPrintInterceptor")
         public SqlPrintInterceptor sqlPrintInterceptor(){
         	return new SqlPrintInterceptor();
         }
-
-
 
         /**
          * 分页插件
          * @return
          */
 
-        @Bean
+        @Bean("pageHelper")
         public PageHelper pageHelper() {
             PageHelper pageHelper = new PageHelper();
             Properties p = new Properties();
