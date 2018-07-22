@@ -3,6 +3,33 @@ server:
 spring:
   profiles:
     active: ws,common,circle
+  datasource:
+  #123.207.23.166:3306
+    name: db
+    url: jdbc:mysql://119.29.208.67:3306/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
+    username: momo
+    password: MOcj520.
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    minIdle: 5
+    maxActive: 100
+    initialSize: 10
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 50
+    removeAbandoned: true
+    filters: stat
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+    druidLoginName: momo # 登录druid的账号
+    druidPassword: momo # 登录druid的密码
+
   freemarker:
     request-context-attribute: req
     suffix: .html
@@ -27,54 +54,6 @@ spring:
   session:
       store-type: none
 
-  datasource:
-  #123.207.23.166:3306
-    name: db
-    url: jdbc:mysql://119.29.208.67:3306/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
-    username: momo
-    password: MOcj123.
-    driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    minIdle: 5
-    maxActive: 100
-    initialSize: 10
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxPoolPreparedStatementPerConnectionSize: 50
-    removeAbandoned: true
-    filters: stat
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-    useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
-    druidLoginName: momo # 登录druid的账号
-    druidPassword: momo # 登录druid的密码
-
-  circle-datasource:
-    #123.207.23.166:3306
-      name: db
-      url: jdbc:mysql://119.29.208.67:3307/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
-      username: momo
-      password: momo
-      driver-class-name: com.mysql.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
-      minIdle: 5
-      maxActive: 100
-      initialSize: 10
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxPoolPreparedStatementPerConnectionSize: 50
-      removeAbandoned: true
 
      # HTTP ENCODING
   http:

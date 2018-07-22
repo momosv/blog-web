@@ -3,7 +3,7 @@ package cn.momosv.blog.web.mybatisConfig;
 
 
 
-import cn.momosv.blog.web.dataSource.SqlPrintInterceptor;
+import cn.momosv.blog.common.config.SqlPrintInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -114,13 +114,15 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
         }
 
         @Bean
+        @Primary
         public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         	return new SqlSessionTemplate(sqlSessionFactory);
         }
         
         //事务管理
-        @Bean(name = "DataSourceTransactionManager")
-        public PlatformTransactionManager annotationDrivenTransactionManager() {
+        @Bean(name = "DataSourceTransactionManager ")
+        @Primary
+        public DataSourceTransactionManager  annotationDrivenTransactionManager() {
             return new DataSourceTransactionManager(dataSource);
         }
 
