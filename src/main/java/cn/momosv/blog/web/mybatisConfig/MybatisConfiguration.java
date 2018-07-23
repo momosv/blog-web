@@ -113,16 +113,20 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
             }
         }
 
-        //事务管理
-        @Bean(name = "DataSourceTransactionManager")
-        public PlatformTransactionManager annotationDrivenTransactionManager() {
-            return new DataSourceTransactionManager(dataSource);
-        }
-
-        @Bean("sqlSessionTemplate")
+        @Bean
+        @Primary
         public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         	return new SqlSessionTemplate(sqlSessionFactory);
         }
+        
+        //事务管理
+        @Bean(name = "DataSourceTransactionManager ")
+        @Primary
+        public DataSourceTransactionManager  annotationDrivenTransactionManager() {
+            return new DataSourceTransactionManager(dataSource);
+        }
+
+
 
         //将要执行的sql进行日志打印(不想拦截，就把这方法注释掉)
         @Bean("sqlPrintInterceptor")

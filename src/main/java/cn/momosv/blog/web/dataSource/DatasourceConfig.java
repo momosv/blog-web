@@ -6,6 +6,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -82,8 +83,9 @@ public class DatasourceConfig {
 	
     @Bean(name="dataSource",destroyMethod = "close", initMethod="init")
     @Primary //不要漏了这
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
-        DruidDataSource datasource = new DruidDataSource();  
+        DruidDataSource datasource = new DruidDataSource();
         try {  
 	        datasource.setUrl(this.dbUrl);  
 	        datasource.setDbType(dbType);
@@ -101,7 +103,9 @@ public class DatasourceConfig {
 	        datasource.setTestOnBorrow(testOnBorrow);  
 	        datasource.setTestOnReturn(testOnReturn);  
 	        datasource.setPoolPreparedStatements(poolPreparedStatements);  
-            datasource.setFilters(filters);  
+            datasource.setFilters(filters);
+            datasource.setRemoveAbandoned(true);
+        //    datasource.setUseGlobalDataSourceStat(true);
         } catch (SQLException e) {  
             logger.error("druid configuration initialization filter", e);  
         }  

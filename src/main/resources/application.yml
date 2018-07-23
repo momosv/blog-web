@@ -3,14 +3,12 @@ server:
 spring:
   profiles:
     active: ws,common,circle
-  session:
-      store-type: none
   datasource:
   #123.207.23.166:3306
     name: db
     url: jdbc:mysql://119.29.208.67:3306/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
     username: momo
-    password: MOcj123.
+    password: MOcj520.
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     minIdle: 5
@@ -52,6 +50,10 @@ spring:
       template_update_delay: 0
       default_encoding: UTF-8
       classic_compatible: true
+
+  session:
+      store-type: none
+
 
      # HTTP ENCODING
   http:
