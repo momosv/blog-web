@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 @EnableScheduling//定时任务
 @EnableAsync // 开启异步任务支持
+@EnableCaching //开启缓存
 @ConfigurationProperties("application.yml") //接收application.yml中的myProps下面的属性
 @RestController
 @SpringBootApplication
@@ -57,3 +59,4 @@ public class BlogWebApplication extends SpringBootServletInitializer {
 		return new Msg().add("page",info);
 	}
 }
+
