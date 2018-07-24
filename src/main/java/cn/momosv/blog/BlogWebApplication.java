@@ -1,8 +1,7 @@
 package cn.momosv.blog;
 
-import cn.momosv.blog.circle.model.TbUserPO;
-import cn.momosv.blog.common.model.base.BasicExample;
-import cn.momosv.blog.common.model.base.Msg;
+import cn.momosv.blog.base.mybatis.model.base.BasicExample;
+import cn.momosv.blog.base.mybatis.model.base.Msg;
 import cn.momosv.blog.ws.model.TbFriendPO;
 import cn.momosv.blog.ws.service.FriendService;
 import com.github.pagehelper.Page;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 

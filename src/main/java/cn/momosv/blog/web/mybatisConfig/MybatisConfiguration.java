@@ -3,7 +3,7 @@ package cn.momosv.blog.web.mybatisConfig;
 
 
 
-import cn.momosv.blog.common.config.SqlPrintInterceptor;
+import cn.momosv.blog.base.mybatis.config.SqlPrintInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +23,6 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
@@ -53,7 +52,7 @@ public class MybatisConfiguration implements TransactionManagementConfigurer {
         @Value("${mybatis-common.type-aliases-package}")
         private   String typeAliasesPackage;
         //  配置mapper的扫描，找到所有的mapper.xml映射文件
-         final static String BASIC_MAPPER_DAO="cn.momosv.blog.common.dao";
+         final static String BASIC_MAPPER_DAO="cn.momosv.blog.base.mybatis.dao";
         @Value("${mybatis-common.mapper-locations}")
         private  List<String> BASIC_MAPPER_LOCATIONS;
 
