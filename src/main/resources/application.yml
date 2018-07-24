@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   profiles:
-    active: ws,common,circle,base
+    active: ws,common,circle,base,login
   datasource:
   #123.207.23.166:3306
     name: db

@@ -18,13 +18,7 @@
 		<relativePath>../blog-combine/pom.xml</relativePath>
 	</parent>
 <dependencies>
-	<!--、、、、、、、、、、、-前端框架、、、、、、、、、、、、、、、、-->
 
-	<dependency>
-		<groupId>cn.momosv</groupId>
-		<artifactId>blog-common</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</dependency>
 
 	<dependency>
 		<groupId>cn.momosv</groupId>
@@ -37,6 +31,19 @@
 		<artifactId>blog-circle</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
+
+
+	<dependency>
+		<groupId>cn.momosv</groupId>
+		<artifactId>blog-login</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+
+
+
+	<!--、、、、、、、、、、、-前端框架、、、、、、、、、、、、、、、、-->
+
+
 
 
 	<dependency>

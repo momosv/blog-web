@@ -1,3 +1,4 @@
+/*
 package cn.momosv.blog.web.interceptor;
 
 
@@ -23,3 +24,4 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/html/**").addResourceLocations("classpath:/html/");
     }
 }
+*/
