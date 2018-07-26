@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8"/>
+    <title>图链接</title>
+    <!-- <link href="style/reset.css" type="text/css" rel="stylesheet"> -->
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
+    <script type="text/javascript">
+
+    function uploadimag(){
+    	var formData = new FormData(document.getElementById('upload_my_img'));
+    	 $.ajax({
+            url: "https://sm.ms/api/upload",
+            type: 'POST',
+            data: formData,
+            // 告诉jQuery不要去处理发送的数据
+            processData: false,
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType: false,
+            dataType:"json",
+            success: function(rs) {
+              if(rs.code!="error"){
+              	$('#pic_url').val(rs.data.url);
+              	document.getElementById("img").src = rs.data.url;
+              }
+            }
+        });
+    }
+
+    </script>
+</head>
+
+<body style="width: 1000px;margin: 0 auto">
+
+    <div style="text-align: center;width: 1000px;width: 1000px;margin: 0 auto;padding-top: 300px;">
+        <h1>在线生成图片URL</h1>
+        <form method="post" action="" enctype="multipart/form-data" id="upload_my_img" >
+            <div class="input-group">
+                <input  class="form-control" type="file" id="files" name="smfile" onchange="uploadimag()" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"  >
+            </div>
+        </form>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">图片链接</span>
+            <input class="form-control input-lg" type="text" name="pic_url" id="pic_url"  aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div>
+            <img id="img" src="">
+        </div>
+    </div>
+</body>
+
+</html>
