@@ -13,7 +13,7 @@
     function uploadimag(){
     	var formData = new FormData(document.getElementById('upload_my_img'));
     	 $.ajax({
-            url: "/upload/up/",
+            url: "/upload/up/momo"+"?upLoadUser=momo",
             type: 'POST',
             data: formData,
             // 告诉jQuery不要去处理发送的数据
@@ -24,7 +24,7 @@
             success: function(rs) {
               if(rs.code!="error"){
               	$('#pic_url').val(rs.extend.url);
-              	document.getElementById("img").src = rs.data.url;
+              	document.getElementById("img").src = rs.extend.url;
               }
             }
         });

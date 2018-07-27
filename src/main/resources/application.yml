@@ -1,6 +1,7 @@
 server:
   port: 8081
 spring:
+
   profiles:
     active: ws,common,circle,base,login
   datasource:
@@ -57,11 +58,20 @@ spring:
 
      # HTTP ENCODING
   http:
+    # multipart: 1.5x
+      # max-file-size: 100MB
+      # max-request-size: 1000MB
     encoding.charset: UTF-8
     encoding.enable: true
     encoding.force: true
+
   thymeleaf:
     cache: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 1000MB
 
 mybatis:
   ext:
