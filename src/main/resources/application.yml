@@ -8,8 +8,8 @@ spring:
   #123.207.23.166:3306
     name: db
     url: jdbc:mysql://119.29.208.67:3306/ws?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
-    username: momo
-    password: MOcj520.
+    username: root
+    password: 123456
     useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
     driver-class-name: com.mysql.jdbc.Driver
     db-type: com.alibaba.druid.pool.DruidDataSource

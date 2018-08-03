@@ -41,6 +41,7 @@
 
 
 
+
 	<!--、、、、、、、、、、、-前端框架、、、、、、、、、、、、、、、、-->
 
 
@@ -70,6 +71,14 @@
 		<artifactId>sockjs-client</artifactId>
 		<version>1.1.2</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.webjars/extjs -->
+	<dependency>
+		<groupId>org.webjars</groupId>
+		<artifactId>extjs</artifactId>
+		<version>4.1.1a</version>
+	</dependency>
+
+
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot</artifactId>
